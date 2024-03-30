@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form Example</title>
+</head>
+<body>
+  <h1>Example Form</h1>
+  <form action="/submit" method="post">
+    <label for="dropdown">Select an option:</label>
+    <select id="dropdown" name="dropdown">
+      <option value="option1">Option 1</option>
+      <option value="option2">Option 2</option>
+      <option value="option3">Option 3</option>
+    </select>
+    <br><br>
+    
+    <label for="radio">Choose one:</label><br>
+    <input type="radio" id="radio1" name="radio" value="radio1">
+    <label for="radio1">Option 1</label><br>
+    <input type="radio" id="radio2" name="radio" value="radio2">
+    <label for="radio2">Option 2</label><br>
+    <input type="radio" id="radio3" name="radio" value="radio3">
+    <label for="radio3">Option 3</label><br>
+    <br>
+    
+    <label for="text">Enter some text:</label><br>
+    <input type="text" id="text" name="text"><br><br>
+    
+    <input type="submit" value="Submit">
+  </form>
+</body>
+</html>
+

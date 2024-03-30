@@ -1,0 +1,14 @@
+# Artifacts
+*.pyc
+*.log
+*.job
+
+
+# Google Cloud
+.gcloudignore
+__pycache__/
+.venv/
+
+### IDE ###
+.vscode/
+.idea/
