@@ -5,6 +5,8 @@ from flask import Flask, render_template, request, Response
 app = Flask(__name__)
 
 
+data  = []
+
 @app.route("/form")
 def form():
     return render_template("form.html")
@@ -12,28 +14,31 @@ def form():
 
 @app.route("/submitted", methods=["POST"])
 def submitted_form():
-    name = request.form["name"]
-    email = request.form["email"]
-    site = request.form["site_url"]
-    comments = request.form["comments"]
-
-    return render_template(
-        "submitted_form.html", name=name, email=email, site=site, comments=comments
-    )
+    data.append("Name: " + request.form["name"])
+    data.append("Url: " + request.form["url"])
+    data.append("Duration: " + request.form["duration"])
+    data.append("Concurrency: " + request.form["concurrency"])
+    data.append("Threshold: " + request.form["threshold"])
+    data.append("Peak: " + request.form["peak"])
+    data.append("Dropdown: " + request.form["dropdown"])
+    return render_template('index.html')
 
 
 @app.errorhandler(500)
-def server_error(e):
+def server_error(_):
     # Log the error and stacktrace.
     logging.exception("An error occurred during a request.")
     return "An internal error occurred.", 500
 
 
 def background_task():
-    for i in range(10):
-        time.sleep(1)  # Simulate some work
+    while len(data) == 0:
+        time.sleep(1)
+
+    for z in data:
+        time.sleep(5)  # Simulate some work
         # Send message to client
-        yield f"data: Task update {i+1}\n\n"
+        yield z
 
 
 @app.route('/')

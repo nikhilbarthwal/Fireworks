@@ -4,17 +4,73 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Background Task Update</title>
+    <title>Fireworks: Load Testing Tool</title>
+    <style>
+        h1 {text-align: center;}
+        table { border-collapse: collapse; }
+        td { padding: 10px; }
+    </style>
 </head>
 <body>
-    <h1>Background Task Update</h1>
-    <div id="output"></div>
+    <div class="center"><h1>Fireworks: Load Testing Tool</h1><hr/></div>
+    <br/>
+    <div id="main">
+        <form method="post" action="{{ url_for('submitted_form') }}">
+            <table align="center">
+                <tr>
+                    <td><label for="name">Run Name:</label></td>
+                    <td><label><input type="text" name="name" /></label></td>
+                </tr>
+                <tr>
+                    <td><label for="url">URL:</label></td>
+                    <td><label><input type="text" name="url" /></label></td>
+                </tr>
+                <tr>
+                    <td><label for="duration">Duration (in secs):</label></td>
+                    <td><label><input type="text" name="duration" /></label></td>
+                </tr>
+                <tr>
+                    <td><label for="concurrency">Concurrency:</label></td>
+                    <td><label><input type="text" name="concurrency" /></label></td>
+                </tr>
+                <tr>
+                    <td><label for="threshold">Threshold:</label></td>
+                    <td><label><input type="text" name="threshold" /></label></td>
+                </tr>
+                <tr>
+                    <td><label for="peak">Peak:</label></td>
+                    <td><label><input type="text" name="peak"></label></td>
+                </tr>
+                <tr>
+                    <td><label for="dropdown">Select an option:</label></td>
+                    <td><label><select id="dropdown" name="dropdown">
+                        <option value="option1">Option 1</option>
+                        <option value="option2">Option 2</option>
+                        <option value="option3">Option 3</option>
+                        <option value="option4">Option 4</option>
+                    </select></label></td>
+                </tr>
+                <tr>
+                    <td><input type="submit"></td>
+                </tr>
+            </table>
+            <br/>
+        </form>
+    </div>
+    <br/><hr/><br/>
     <script>
         const eventSource = new EventSource('/stream');
-        const outputDiv = document.getElementById('output');
+        const outputDiv = document.getElementById('main');
+        var flip = false;
 
         eventSource.onmessage = function(event) {
-            outputDiv.innerHTML += event.data + '<br>';
+            if (flip) {
+               outputDiv.innerHTML += event.data + '<br>';
+            }
+            else {
+                outputDiv.innerHTML = event.data + '<br>';
+                flip = true;
+            }
         };
 
         eventSource.onerror = function(event) {
