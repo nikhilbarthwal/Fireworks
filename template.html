@@ -14,19 +14,20 @@
 <div class="center"><h1>Fireworks: Load Testing Tool</h1><hr/><br/></div>
 <h3>Input Parameters:</h3>
 <table>
-    <tr><td>URL:</td><td><i>{{item}}</i></td></tr>
+    <tr><td>URL:</td><td><i>{{url}}</i></td></tr>
     <tr><td>Concurrency:</td><td><i>{{concurrency}}</i></td></tr>
     <tr><td>Requests per thread:</td><td><i>{{requests_per_thread}}</i></td></tr>
+    <tr><td>Std. Deviation:</td><td><i>{{std_deviation}}</i></td></tr>
 </table>
 <br/>
 <hr/>
 <br/>
 <h3>Report:</h3>
 <table>
-    <tr><td>Errors (%):</td><td><i>{{ errors }}</i></td></tr>
-    <tr><td>Mean Response time:</td><td><i>{{ mean }}</i></td></tr>
-    {% for item in percentile_results %}
-        <tr><td>{{ item[0] }}% Percentile:</td><td><i>{{ item[1] }}</i></td></tr>
+    <tr><td>Errors (%):</td><td><i>{{errors}}</i></td></tr>
+    <tr><td>Mean Response time:</td><td><i>{{mean}}</i></td></tr>
+    {% for item in percentiles %}
+    <tr><td>{{item[0]}}% Percentile:</td><td><i>{{item[1]}}</i></td></tr>
     {% endfor %}
 </table>
 </body>
